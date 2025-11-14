@@ -5,7 +5,7 @@ import http.client
 import json
 import time
 import urllib.parse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Type
 
@@ -60,7 +60,7 @@ def is_dst(zone_name):
     :rtype: bool
     """
     tz = pytz.timezone(zone_name)
-    now = pytz.utc.localize(datetime.utcnow())
+    now = pytz.utc.localize(datetime.now(timezone.utc))
     return now.astimezone(tz).dst() != timedelta(0)
 
 
